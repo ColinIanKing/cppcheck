@@ -13,22 +13,22 @@ parts:
         source-type: git
         source: https://github.com/danmar/cppcheck.git
         make-parameters:
-            - CFGDIR=/snap/cppcheck/current/var/snap/cppcheck/common/
+            - FILESDIR=/snap/cppcheck/current/config
 
         build-packages:
             - gcc
             - make
 
-        prime:
-            - usr/bin/
-
-    config:
-        plugin: dump
         organize:
-           '*': var/snap/cppcheck/common/
+                snap/cppcheck/current/config: config
 
-        prime:
-            - var/snap/cppcheck/common/*
+        filesets:
+            all:
+                - usr/bin/*
+                - config/*
+        stage: [$all]
+        prime: [$all]
+
 
 apps:
     cppcheck:
